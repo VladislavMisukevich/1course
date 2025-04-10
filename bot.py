@@ -1,6 +1,8 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
+import threading
+from flask import Flask
 
 # 🔐 Вставь сюда свой токен
 TOKEN = "7357522794:AAHqsKsbtForBWBF9bzve6FUx-AXggD5dDc"
@@ -28,6 +30,11 @@ lessons = [
 
 # 💾 Храним, какой урок был у пользователя
 user_progress = {}
+
+app = Flask(__name__)
+
+def run_flask():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 # 📍 Команда /start
 @bot.message_handler(commands=['start'])
@@ -66,5 +73,11 @@ def handle_learn(call):
     # Обновить прогресс
     user_progress[user_id] = index + 1
 
+
+def run_bot():
+    bot.infinity_polling()
+
 # ▶ Запуск
-bot.polling()
+if __name__ == "__main__":
+    threading.Thread(target=run_flask).start()
+    threading.Thread(target=run_bot).start()
