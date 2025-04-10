@@ -3,7 +3,8 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
 
 # 🔐 Вставь сюда свой токен
-TOKEN = os.getenv("7357522794:AAHqsKsbtForBWBF9bzve6FUx-AXggD5dDc")
+TOKEN = "7357522794:AAHqsKsbtForBWBF9bzve6FUx-AXggD5dDc"
+print(f"TOKEN is: {TOKEN}")
 bot = telebot.TeleBot(TOKEN)
 
 # 📚 Список уроков (видео и табы)
